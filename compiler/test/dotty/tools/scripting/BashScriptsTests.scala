@@ -202,6 +202,7 @@ class BashScriptsTests:
     val testJar = testFile(s"$scriptBase.jar") // jar should not be created when scriptFile runs
     val tj = Paths.get(testJar).toFile
     if tj.isFile then tj.delete() // discard residual debris from previous test
+    if tj.exists() then {println("file can't be deleted") }
     printf("===> verify '-save' is cancelled by '-nosave' in script hashbang.`\n")
     val (validTest, exitCode, stdout, stderr) = bashCommand(s"SCALA_OPTS=-save ${scriptFile.absPath}")
     printf("stdout: %s\n", stdout.mkString("\n","\n",""))
